@@ -50,11 +50,9 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
-            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.3.0</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -62,9 +60,9 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>com.github.jsimone</groupId>
+                                    <groupId>com.heroku</groupId>
                                     <artifactId>webapp-runner</artifactId>
-                                    <version>8.5.31.0</version>
+                                    <version>9.0.68.0</version>
                                     <destFileName>webapp-runner.jar</destFileName>
                                 </artifactItem>
                             </artifactItems>
@@ -72,7 +70,6 @@
                     </execution>
                 </executions>
             </plugin>
-            
             <plugin>
                 <groupId>com.heroku.sdk</groupId>
                 <artifactId>heroku-maven-plugin</artifactId>
