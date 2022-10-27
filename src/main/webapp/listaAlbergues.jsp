@@ -51,6 +51,9 @@
                         <form action="ServletMascota">  
                             <input type="hidden" name="tipo" value="listarMascotaAlbergue">	
                             <div>
+                                <% 
+                                    
+                                %>
                                 <label>Bienvenido: <jsp:getProperty name="usuarioBean" property ="nombreUsuario" /> <jsp:getProperty name="usuarioBean" property ="apellidoUsuario" /></label>
                             </div>
                             <hr>
