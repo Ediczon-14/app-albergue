@@ -25,7 +25,7 @@
             <%-- <%@include file="/menuUsuario.jsp"%>--%>
             <div class="container">
                 <div class="text-center">
-                   <%--  <h2 class="bg-light text-dark"><jsp:getProperty name="aBean" property ="nombreAlbergue"/></h2>--%>
+                    <h2 class="bg-light text-dark"><jsp:getProperty name="aBean" property ="nombreAlbergue"/></h2>
                 </div>
                 <div class="text-center">
                     <a href="test1.jsp" class="btn btn-outline-dark my-2 my-sm-0">Adoptar</a>

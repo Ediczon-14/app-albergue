@@ -36,9 +36,9 @@
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-
+        
         <!-- Sidebar -->
-        <%-- <%@include file="/admin.jsp" %> --%>
+        <%@include file="/admin.jsp" %>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
