@@ -51,7 +51,6 @@
                         </a>
                         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
                             <li><a class="dropdown-item" href="#">Perfil</a></li>
-                            <li><a class="dropdown-item" href="ServletMascota?tipo=listarSolicitud&id=<%=emp.getIdUsuario()%>">Solicitud</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="login.jsp">Salir</a></li>
                         </ul>

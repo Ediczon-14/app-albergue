@@ -37,10 +37,20 @@
                             <img src="https://us.123rf.com/450wm/martialred/martialred1608/martialred160800018/61263271-cuenta-de-usuario-perfil-del-icono-del-c%C3%ADrculo-plana-para-aplicaciones-y-sitios-web.jpg?ver=6" alt="mdo" width="32" height="32" class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
-                            <li><a class="dropdown-item" href="#">Perfil</a></li>
-                            <li><a class="dropdown-item" href="ServletMascota?tipo=listarSolicitud&id=<%=a2.getIdUsuario()%>">Solicitud</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="login.jsp">Salir</a></li>
+                            <li><a class="btn btn-outline-dark my-2 my-sm-0 form-control" href="#">Perfil</a></li>
+                            <li>
+                                <form action="ServletMascota">
+                                    <input type="hidden" name="tipo" value="listarSolicitud">
+                                    <div class="form-group" style="display: none">
+                                        <input type="number" name="idAlbergue" required class="form-control" value="<%=al.getIdAlbergue()%>">
+                                    </div>
+                                    <div class="form-group" style="display: none">
+                                        <input type="number" name="idUsuario" required class="form-control" value="<%=a2.getIdUsuario()%>">
+                                    </div>
+                                    <input type="submit" value="Solicitud" class="btn btn-outline-dark my-2 my-sm-0 form-control">                                                            
+                                </form>
+                            </li>
+                            <li><a class="btn btn-outline-dark my-2 my-sm-0 form-control" href="login.jsp">Salir</a></li>
                         </ul>
                     </div>
                 </div>

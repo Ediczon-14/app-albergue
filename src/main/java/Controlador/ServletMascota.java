@@ -126,11 +126,19 @@ public class ServletMascota extends HttpServlet {
 			throws ServletException, IOException 
     {
         //Se obtiene los parametros
-        String id = request.getParameter("id");
+        String idMascota = request.getParameter("idMascota");
+        String idAlbergue = request.getParameter("idAlbergue");
+        
         //Se inserta a la BD el cursos
-        List<Mascota> info = new ModeloMascota().listarMascota(Integer.parseInt(id));
+        List<Mascota> info = new ModeloMascota().listarMascota(Integer.parseInt(idMascota));
         //Se almacena en memoria llamada request
+        
+        ModeloAlbergue model = new ModeloAlbergue();
+        Albergue a = model.buscaAlbergue(Integer.parseInt(idAlbergue));
+        
         request.setAttribute("data",info);
+        request.setAttribute("data2",a);
+        
         //Se reenvia el request(con los datos) al jsp catalogo.jsp
         request.getRequestDispatcher("catalogo.jsp").forward(request, response);
     }
@@ -190,19 +198,22 @@ public class ServletMascota extends HttpServlet {
         ModeloMascota model = new ModeloMascota();
         model.insertaMascota(a);
             
-        request.getRequestDispatcher("catalogo.jsp").forward(request, response);
+        request.getRequestDispatcher("ServletMascota?tipo=listarMascota&idMascota="+idAlbergue+"&idAlbergue="+idAlbergue).forward(request, response);
     }
     protected void eliminarMascota(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
     {
         //Se obtiene los parametros
-        String id = request.getParameter("id");
+        String idAlbergue = request.getParameter("idAlbergue");
+        String idMascota = request.getParameter("idMascota");
 		
         //Se inserta a la BD el cursos
         ModeloMascota model = new ModeloMascota();
-        model.eliminaMascota(Integer.parseInt(id));
+        model.eliminaMascota(Integer.parseInt(idMascota));
         //Se lista todos los cursos
-        listarMascota(request, response);
+        
+        request.getRequestDispatcher("ServletMascota?tipo=listarMascota&idMascota="+idAlbergue+"&idAlbergue="+idAlbergue).forward(request, response);
+        
     }
     protected void actualizarMascota(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException
@@ -260,7 +271,8 @@ public class ServletMascota extends HttpServlet {
     protected void modificarMascota(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException
     {
-        String idMascota = request.getParameter("id");
+        String idAlbergue = request.getParameter("idAlbergue");
+        String idMascota = request.getParameter("idMascota");
         	
         //se Crea el objeto cursos
         Mascota a = new Mascota();
@@ -272,13 +284,13 @@ public class ServletMascota extends HttpServlet {
         model.modificarMascota(a);
 
         //Se lista todos los cursos
-        listarMascota(request, response);
+        request.getRequestDispatcher("ServletMascota?tipo=listarMascota&idMascota="+idAlbergue+"&idAlbergue="+idAlbergue).forward(request, response);
 				
     }
     protected void listarCaracteristicas(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
     {
-        
+        String idAlbergue = request.getParameter("idAlbergue");
         //Se inserta a la BD el cursos
         List<Caracter> info = new ModeloMascota().listarCaracter();
         List<Pelaje> info2=new ModeloMascota().listarPelaje();
@@ -289,6 +301,15 @@ public class ServletMascota extends HttpServlet {
         request.setAttribute("data2",info2);
         request.setAttribute("data3",info3);
         request.setAttribute("data4",info4);
+        
+        
+        
+        
+        ModeloAlbergue model2 = new ModeloAlbergue();
+        Albergue a2 = model2.buscaAlbergue(Integer.parseInt(idAlbergue));
+        
+        request.setAttribute("data5",a2);
+        
         //Se reenvia el request(con los datos) al jsp listaCursos.jsp
         request.getRequestDispatcher("/registrarMascota.jsp").forward(request, response);
     }
@@ -296,14 +317,27 @@ public class ServletMascota extends HttpServlet {
 			throws ServletException, IOException 
     {
         //Se obtiene los parametros
-        String id = request.getParameter("id");
+        String idMascota = request.getParameter("idMascota");
+        String idAlbergue = request.getParameter("idAlbergue");
+        String idUsuario = request.getParameter("idUsuario");
 
         //Se inserta a la BD el cursos
         ModeloMascota model = new ModeloMascota();
-        Mascota a = model.listarMascotaDetallado(Integer.parseInt(id));
+        Mascota a = model.listarMascotaDetallado(Integer.parseInt(idMascota));
 
         //Se almacena en memoria llamada request
         request.setAttribute("data",a);
+        
+        
+        ModeloAlbergue model2 = new ModeloAlbergue();
+        Albergue a2 = model2.buscaAlbergue(Integer.parseInt(idAlbergue));
+
+        ModeloUsuario model3 = new ModeloUsuario();
+        Usuario a3 = model3.buscaUsuario(Integer.parseInt(idUsuario));
+        //Se almacena en memoria llamada request
+
+        request.setAttribute("data2",a2);
+        request.setAttribute("data3",a3);
 
         //Se reenvia el request(con los datos) al jsp listaCursos.jsp
         request.getRequestDispatcher("/mascotaDetalles.jsp").forward(request, response);
@@ -330,19 +364,41 @@ public class ServletMascota extends HttpServlet {
         
         ModeloMascota model = new ModeloMascota();
         model.insertaSolicitud(a);
+        
+        ModeloAlbergue model2 = new ModeloAlbergue();
+        Albergue a2 = model2.buscaAlbergue(Integer.parseInt(idAlbergue));
+
+        ModeloUsuario model3 = new ModeloUsuario();
+        Usuario a3 = model3.buscaUsuario(Integer.parseInt(idUsuario));
+        //Se almacena en memoria llamada request
+
+        request.setAttribute("data2",a2);
+        request.setAttribute("data3",a3);
+        
             
-        request.getRequestDispatcher("ServletMascota?tipo=listarMascotaAlbergue&id="+idAlbergue).forward(request, response);
+        request.getRequestDispatcher("ServletMascota?tipo=listarMascotaAlbergue&idMascota="+idAlbergue+"&idAlbergue="+idAlbergue+"&idUsuario="+idUsuario).forward(request, response);
     }
     protected void listarSolicitud(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
     {
         
         //Se obtiene los parametros
-        String id = request.getParameter("id");
+        String idUsuario = request.getParameter("idUsuario");
+        String idAlbergue = request.getParameter("idAlbergue");
         //Se inserta a la BD el cursos
-        List<Solicitud> info = new ModeloMascota().listarSolicitud(Integer.parseInt(id));
+        List<Solicitud> info = new ModeloMascota().listarSolicitud(Integer.parseInt(idUsuario));
         //Se almacena en memoria llamada request
         request.setAttribute("data",info);
+        
+        ModeloAlbergue model2 = new ModeloAlbergue();
+        Albergue a2 = model2.buscaAlbergue(Integer.parseInt(idAlbergue));
+
+        ModeloUsuario model3 = new ModeloUsuario();
+        Usuario a3 = model3.buscaUsuario(Integer.parseInt(idUsuario));
+        
+        request.setAttribute("data2",a2);
+        request.setAttribute("data3",a3);
+        
         //Se reenvia el request(con los datos) al jsp catalogo.jsp
         request.getRequestDispatcher("listarSolicitudUsuario.jsp").forward(request, response);
     }
@@ -351,11 +407,17 @@ public class ServletMascota extends HttpServlet {
     {
         
         //Se obtiene los parametros
-        String id = request.getParameter("id");
+        String idAlbergue = request.getParameter("idAlbergue");
         //Se inserta a la BD el cursos
-        List<Solicitud> info = new ModeloMascota().listarSolicitudAlbergue(Integer.parseInt(id));
+        List<Solicitud> info = new ModeloMascota().listarSolicitudAlbergue(Integer.parseInt(idAlbergue));
         //Se almacena en memoria llamada request
         request.setAttribute("data",info);
+        
+        ModeloAlbergue model2 = new ModeloAlbergue();
+        Albergue a2 = model2.buscaAlbergue(Integer.parseInt(idAlbergue));
+        //Se almacena en memoria llamada request
+
+        request.setAttribute("data2",a2);
         //Se reenvia el request(con los datos) al jsp catalogo.jsp
         request.getRequestDispatcher("listarSolicitudAlbergue.jsp").forward(request, response);
     }
@@ -367,7 +429,7 @@ public class ServletMascota extends HttpServlet {
         String fechaEntrega = request.getParameter("fechaEntrega");
         String idEstado= request.getParameter("idEstado");
         String idAlbergue = request.getParameter("idAlbergue");       
-        String id = request.getParameter("id");
+        String id = request.getParameter("idSolicitud");
 		
         //se Crea el objeto cursos
         Solicitud a = new Solicitud();
@@ -381,20 +443,28 @@ public class ServletMascota extends HttpServlet {
         model.actualizaSolicitud(a);
 
         //Se lista todos los cursos
-        request.getRequestDispatcher("ServletMascota?tipo=listarMascota&id="+idAlbergue).forward(request, response);
+        request.getRequestDispatcher("ServletMascota?tipo=listarSolicitudAlbergue&idAlbergue="+idAlbergue).forward(request, response);
 				
     }
     protected void buscarSolicitud(HttpServletRequest request, HttpServletResponse response) 
                     throws ServletException, IOException 
     {
         //Se obtiene los parametros
-        String id = request.getParameter("id");
+        String idAlbergue = request.getParameter("idAlbergue");
+        String idSolicitud = request.getParameter("idSolicitud");
 
         //Se inserta a la BD el cursos
         ModeloMascota model = new ModeloMascota();
-        Solicitud a = model.buscaSolicitud(Integer.parseInt(id));
+        Solicitud a = model.buscaSolicitud(Integer.parseInt(idSolicitud));
 
         //Se almacena en memoria llamada request
+        
+        ModeloAlbergue model2 = new ModeloAlbergue();
+        Albergue a2 = model2.buscaAlbergue(Integer.parseInt(idAlbergue));
+        //Se almacena en memoria llamada request
+
+        request.setAttribute("data2",a2);
+        
         request.setAttribute("data",a);
 
         //Se reenvia el request(con los datos) al jsp listaCursos.jsp
@@ -411,6 +481,11 @@ public class ServletMascota extends HttpServlet {
         List<Solicitud> info = new ModeloMascota().listarSolicitudAlbergue(Integer.parseInt(id));
         //Se almacena en memoria llamada request
         request.setAttribute("data",info);
+        
+        
+        ModeloAlbergue model2 = new ModeloAlbergue();
+        Albergue a3 = model2.buscaAlbergue(Integer.parseInt(id));
+        request.setAttribute("data3",a3);
         //Se reenvia el request(con los datos) al jsp catalogo.jsp
         request.getRequestDispatcher("tables.jsp").forward(request, response);
     }
@@ -419,11 +494,18 @@ public class ServletMascota extends HttpServlet {
     {
  
         //Se obtiene los parametros
-        String id = request.getParameter("id");
+        String idAlbergue = request.getParameter("idAlbergue");
         //Se inserta a la BD el cursos
-        List<Solicitud> info = new ModeloMascota().listarSolicitudAlbergue(Integer.parseInt(id));
-        List<Mascota> info2 = new ModeloMascota().listarMascota(Integer.parseInt(id));
+        List<Solicitud> info = new ModeloMascota().listarSolicitudAlbergue(Integer.parseInt(idAlbergue));
+        List<Mascota> info2 = new ModeloMascota().listarMascota(Integer.parseInt(idAlbergue));
         //Se almacena en memoria llamada request
+        
+        ModeloAlbergue model2 = new ModeloAlbergue();
+        Albergue a3 = model2.buscaAlbergue(Integer.parseInt(idAlbergue));
+        //Se almacena en memoria llamada request
+
+        request.setAttribute("data3",a3);
+        
         request.setAttribute("data",info);
         request.setAttribute("data2",info2);
         //Se reenvia el request(con los datos) al jsp catalogo.jsp
@@ -440,6 +522,12 @@ public class ServletMascota extends HttpServlet {
         //Se almacena en memoria llamada request
         request.setAttribute("data",info);
         request.setAttribute("data2",info2);
+        
+        
+        ModeloAlbergue model2 = new ModeloAlbergue();
+        Albergue a3 = model2.buscaAlbergue(Integer.parseInt(id));
+        request.setAttribute("data3",a3);
+        
         //Se reenvia el request(con los datos) al jsp catalogo.jsp
         request.getRequestDispatcher("charts.jsp").forward(request, response);
     }
