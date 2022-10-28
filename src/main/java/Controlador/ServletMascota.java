@@ -5,12 +5,14 @@
  */
 package Controlador;
 
+import Entidad.Albergue;
 import Entidad.Caracter;
 import Entidad.Mascota;
 import Entidad.Pelaje;
 import Entidad.Sexo;
 import Entidad.Solicitud;
 import Entidad.Tamano;
+import Modelo.ModeloAlbergue;
 import Modelo.ModeloMascota;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -134,11 +136,18 @@ public class ServletMascota extends HttpServlet {
 			throws ServletException, IOException 
     {
         //Se obtiene los parametros
-        String id = request.getParameter("id");
+        String idMascota = request.getParameter("idMascota");
+        String idAlbergue = request.getParameter("idAlbergue");
         //Se inserta a la BD el cursos
-        List<Mascota> info = new ModeloMascota().listarMascota(Integer.parseInt(id));
+        List<Mascota> info = new ModeloMascota().listarMascota(Integer.parseInt(idMascota));
+        
+        ModeloAlbergue model = new ModeloAlbergue();
+        
+        Albergue a = model.buscaAlbergue(Integer.parseInt(idAlbergue));
         //Se almacena en memoria llamada request
         request.setAttribute("data",info);
+        
+        request.setAttribute("data2",a);
         //Se reenvia el request(con los datos) al jsp catalogoAlbergue.jsp
         request.getRequestDispatcher("catalogoAlbergue.jsp").forward(request, response);
     }
@@ -225,6 +234,23 @@ public class ServletMascota extends HttpServlet {
         listarMascota(request, response);
 				
     }
+    protected void buscarMascota(HttpServletRequest request, HttpServletResponse response) 
+                    throws ServletException, IOException 
+    {
+        //Se obtiene los parametros
+        String id = request.getParameter("id");
+
+        //Se inserta a la BD el cursos
+        ModeloMascota model = new ModeloMascota();
+        Mascota a = model.buscaMascota(Integer.parseInt(id));
+
+        //Se almacena en memoria llamada request
+        request.setAttribute("data",a);
+
+        //Se reenvia el request(con los datos) al jsp listaCursos.jsp
+        request.getRequestDispatcher("/actualizaMascota.jsp").forward(request, response);
+
+    }
     protected void modificarMascota(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException
     {
@@ -242,23 +268,6 @@ public class ServletMascota extends HttpServlet {
         //Se lista todos los cursos
         listarMascota(request, response);
 				
-    }
-    protected void buscarMascota(HttpServletRequest request, HttpServletResponse response) 
-                    throws ServletException, IOException 
-    {
-        //Se obtiene los parametros
-        String id = request.getParameter("id");
-
-        //Se inserta a la BD el cursos
-        ModeloMascota model = new ModeloMascota();
-        Mascota a = model.buscaMascota(Integer.parseInt(id));
-
-        //Se almacena en memoria llamada request
-        request.setAttribute("data",a);
-
-        //Se reenvia el request(con los datos) al jsp listaCursos.jsp
-        request.getRequestDispatcher("/actualizaMascota.jsp").forward(request, response);
-
     }
     protected void listarCaracteristicas(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 

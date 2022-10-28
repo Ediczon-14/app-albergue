@@ -59,7 +59,7 @@
                             <hr>
                                 <div class="form-group">
                                     <label>Albergues Disponibles</label>
-                                    <select name="id" class="form-select" required>
+                                    <select name="idMascota" class="form-select" required>
                                         <%
                                             
                                             if(da!=null)
@@ -68,13 +68,29 @@
                                                 {
                                         %>
                                             <option value="<%=a.getIdAlbergue()%>"><%=a.getNombreAlbergue()%> - <%=a.getDireccionAlbergue()%></option>
-                                                <jsp:setProperty name="aBean" property ="idAlbergue" value="<%=a.getIdAlbergue()%>"/>    
-                                                <jsp:setProperty name="aBean" property ="nombreAlbergue" value="<%=a.getNombreAlbergue()%>" />
+                                            
+                                            <input type="hidden" value="<%=a.getIdAlbergue()%>" name="idAlbergue" class="form-control form-submit input_pass" >
                                         <%
+                                                
                                                 }
                                             }
                                         %>
                                     </select>
+                                </div>
+                                <div style="visibility: hidden">
+                                <%
+
+                                    if(da!=null)
+                                    {
+                                        for(Albergue a:da)
+                                        {
+                                          %>  
+                                                
+                                <%
+                                            break;
+                                        }
+                                    }
+                                %>
                                 </div>
                                     <br>
                                 <script>

@@ -98,6 +98,36 @@ public class ModeloAlbergue {
         }
         return salida;
     }
+    public Albergue buscaAlbergue(int idAlbergue)
+    {
+        Connection conn= null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        Albergue obj = null;
+        try {
+            conn = MysqlDBConexion.getConexion();
+            String sql ="select * from albergue where idAlbergue=?";
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, idAlbergue);
+            rs = pstm.executeQuery();
+            if(rs.next()){
+                obj = new Albergue();
+                obj.setIdAlbergue(rs.getInt("idAlbergue"));
+                obj.setNombreAlbergue(rs.getString("Nombre"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally{
+            try {
+                if(rs!= null) rs.close();
+                if(pstm!= null) pstm.close();
+                if(conn!= null) conn.close();
+            } catch (Exception e2) {
+            }
+        }
+
+        return obj;
+    }
     public List<Albergue> listarAlbergue()
     {   Albergue alu=null;
         List<Albergue> data=new ArrayList<Albergue>();

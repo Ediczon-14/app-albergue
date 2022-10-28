@@ -14,6 +14,8 @@
 <%
     List<Mascota> da= (List<Mascota>)request.getAttribute("data");
 %>
+
+<%   Albergue al = (Albergue) request.getAttribute("data2"); %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,8 +26,9 @@
             <%@include file="/header.jsp"%>
             <%-- <%@include file="/menuUsuario.jsp"%>--%>
             <div class="container">
+                
                 <div class="text-center">
-                    <h2 class="bg-light text-dark"><jsp:getProperty name="aBean" property ="nombreAlbergue"/></h2>
+                    <h2 class="bg-light text-dark"><%=al.getNombreAlbergue()%> </h2>
                 </div>
                 <div class="text-center">
                     <a href="test1.jsp" class="btn btn-outline-dark my-2 my-sm-0">Adoptar</a>
