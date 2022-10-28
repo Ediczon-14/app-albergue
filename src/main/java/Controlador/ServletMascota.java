@@ -147,13 +147,12 @@ public class ServletMascota extends HttpServlet {
     {
         //Se obtiene los parametros
         String idMascota = request.getParameter("idMascota");
-        String idAlbergue = request.getParameter("idAlbergue");
         String idUsuario = request.getParameter("idUsuario");
         //Se inserta a la BD el cursos
         List<Mascota> info = new ModeloMascota().listarMascota(Integer.parseInt(idMascota));
         
         ModeloAlbergue model = new ModeloAlbergue();
-        Albergue a = model.buscaAlbergue(Integer.parseInt(idAlbergue));
+        Albergue a = model.buscaAlbergue(Integer.parseInt(idMascota));
         
         ModeloUsuario model2 = new ModeloUsuario();
         Usuario a2 = model2.buscaUsuario(Integer.parseInt(idUsuario));

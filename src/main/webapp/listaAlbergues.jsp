@@ -84,9 +84,10 @@
                                                 for(Albergue a:da)
                                                 {
                                         %>
-                                            <option value="<%=a.getIdAlbergue()%>"><%=a.getNombreAlbergue()%> - <%=a.getDireccionAlbergue()%></option>
-                                            
-                                            <input type="hidden" value="<%=a.getIdAlbergue()%>" name="idAlbergue" class="form-control form-submit input_pass" >
+                                                    <option value="<%=a.getIdAlbergue()%>">
+                                                        <%=a.getNombreAlbergue()%> - <%=a.getDireccionAlbergue()%>
+                                                    </option>
+                                                    
                                         <%
                                                 
                                                 }

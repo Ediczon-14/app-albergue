@@ -79,7 +79,7 @@
                         %>
                                             <div class="col"><br>
                                                 <div class="card" style="width: 11rem;">
-                                                    <img class="card-img-top" width="140" height="140"  src="<%=a.getFoto()%>"  alt="Card image cap">
+                                                    <img class="card-img-top" width="159" height="212"  src="<%=a.getFoto()%>"  alt="Card image cap">
                                                     <div class="card-body">
                                                         <h6 class="card-title"><strong>Nombre: </strong></h6><p><%=a.getNombreMascota()%></p>
                                                         <h6 class="card-title"><strong>Meses: </strong></h6><p><%=a.getMeses()%></p>
@@ -124,7 +124,7 @@
                         %>
                                             <div class="col"><br>
                                                 <div class="card" style="width: 11rem;">
-                                                    <img class="card-img-top" width="140" height="140"  src="<%=a.getFoto()%>"  alt="Card image cap">
+                                                    <img class="card-img-top" width="159" height="212"  src="<%=a.getFoto()%>"  alt="Card image cap">
                                                     <div class="card-body">
                                                         <h6 class="card-title"><strong>Nombre: </strong></h6><p><%=a.getNombreMascota()%></p>
                                                         <h6 class="card-title"><strong>Meses: </strong></h6><p><%=a.getMeses()%></p>

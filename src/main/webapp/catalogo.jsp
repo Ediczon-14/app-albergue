@@ -111,7 +111,7 @@
                         %>
                                                 <div class="col"><br>
                                                     <div class="card" style="width: 11rem;">
-                                                        <img class="card-img-top" width="140" height="140"  src="<%=a.getFoto()%>"  alt="Card image cap">
+                                                        <img class="card-img-top" width="159" height="212"  src="<%=a.getFoto()%>"  alt="Card image cap">
                                                         <div class="card-body">
                                                             <h5 class="card-title"><%=a.getNombreMascota()%></h5>
                                                             <%-- <p class="card-text"><%=a.get()%>-<%=a.getUnidadDeMedida()%></p>
