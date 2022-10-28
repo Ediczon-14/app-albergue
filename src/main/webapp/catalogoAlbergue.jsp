@@ -4,6 +4,7 @@
     Author     : edicz
 --%>
 
+<%@page import="Entidad.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@page import="java.util.List"%>
@@ -16,6 +17,7 @@
 %>
 
 <%   Albergue al = (Albergue) request.getAttribute("data2"); %>
+<%   Usuario a2 = (Usuario) request.getAttribute("data3"); %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,14 +26,41 @@
     <body style = "font-family: Lucida Bright,Georgia,serif;">
         <div class="container-fluid d-grid gap-3 align-items-center">
             <%@include file="/header.jsp"%>
-            <%-- <%@include file="/menuUsuario.jsp"%>--%>
+            <header class="p-3 mb-3 border-bottom">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"></ul>
+                    <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                        <span><%=a2.getNombreUsuario()%> <%=a2.getApellidoUsuario()%></span>
+                    </div>
+                    <div class="dropdown text-end">
+                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://us.123rf.com/450wm/martialred/martialred1608/martialred160800018/61263271-cuenta-de-usuario-perfil-del-icono-del-c%C3%ADrculo-plana-para-aplicaciones-y-sitios-web.jpg?ver=6" alt="mdo" width="32" height="32" class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
+                            <li><a class="dropdown-item" href="#">Perfil</a></li>
+                            <li><a class="dropdown-item" href="ServletMascota?tipo=listarSolicitud&id=<%=a2.getIdUsuario()%>">Solicitud</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="login.jsp">Salir</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
             <div class="container">
                 
                 <div class="text-center">
                     <h2 class="bg-light text-dark"><%=al.getNombreAlbergue()%> </h2>
                 </div>
                 <div class="text-center">
-                    <a href="test1.jsp" class="btn btn-outline-dark my-2 my-sm-0">Adoptar</a>
+                    <form action="ServletTest">
+                        <input type="hidden" name="tipo" value="listarDatos">
+                        <div style="visibility: hidden">
+                            <input type="hidden" value="<%=a2.getIdUsuario()%>" name="idUsuario" class="form-control form-submit input_pass" >
+                        </div>
+                        <div style="visibility: hidden">
+                            <input type="hidden" value="<%=al.getIdAlbergue()%>" name="idAlbergue" class="form-control form-submit input_pass" >
+                        </div>
+                        <input type="submit" value="Adoptar" class="btn btn-dark form-control" ><br><br>
+                    </form>
                 </div>
                 <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
                 <%
@@ -65,5 +94,7 @@
             </div>
             <%@include file="/footer.jsp"%>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     </body>
 </html>

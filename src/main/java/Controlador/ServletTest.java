@@ -5,8 +5,12 @@
  */
 package Controlador;
 
+import Entidad.Albergue;
 import Entidad.Mascota;
+import Entidad.Usuario;
+import Modelo.ModeloAlbergue;
 import Modelo.ModeloMascota;
+import Modelo.ModeloUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -62,6 +66,10 @@ public class ServletTest extends HttpServlet {
                 {
                     test3(request, response);
                 }
+                else if(tipo.equals("listarDatos"))
+                        {
+                            listarDatos(request, response);
+                        }
     }
     protected void test1(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
@@ -76,7 +84,8 @@ public class ServletTest extends HttpServlet {
         String pregunta6 = request.getParameter("pregunta6");
         String pregunta7 = request.getParameter("pregunta7");
         String pregunta8 = request.getParameter("pregunta8");
-        String idAlbergue = request.getParameter("id");
+        String idAlbergue = request.getParameter("idAlbergue");
+        String idUsuario = request.getParameter("idUsuario");
         
         int i=530;
         int p1= Integer.parseInt(pregunta1);
@@ -92,10 +101,32 @@ public class ServletTest extends HttpServlet {
         
         
         if(i<=puntos)
-        {
+        {   
+            //Se inserta a la BD el cursos
+
+            ModeloAlbergue model = new ModeloAlbergue();
+            Albergue a = model.buscaAlbergue(Integer.parseInt(idAlbergue));
+
+            ModeloUsuario model2 = new ModeloUsuario();
+            Usuario a2 = model2.buscaUsuario(Integer.parseInt(idUsuario));
+            //Se almacena en memoria llamada request
+
+            request.setAttribute("data2",a);
+            request.setAttribute("data3",a2);
+            
             request.getRequestDispatcher("test2.jsp").forward(request, response);
         }else{
-            request.getRequestDispatcher("ServletMascota?tipo=listarMascotaAlbergue&id="+idAlbergue).forward(request, response);
+            ModeloAlbergue model = new ModeloAlbergue();
+            Albergue a = model.buscaAlbergue(Integer.parseInt(idAlbergue));
+
+            ModeloUsuario model2 = new ModeloUsuario();
+            Usuario a2 = model2.buscaUsuario(Integer.parseInt(idUsuario));
+            //Se almacena en memoria llamada request
+
+            request.setAttribute("data2",a);
+            request.setAttribute("data3",a2);
+            
+            request.getRequestDispatcher("ServletMascota?tipo=listarMascotaAlbergue&idMascota="+idAlbergue+"&idAlbergue="+idAlbergue+"&idUsuario="+idUsuario).forward(request, response);
         }
     }
     protected void test2(HttpServletRequest request, HttpServletResponse response) 
@@ -110,7 +141,8 @@ public class ServletTest extends HttpServlet {
         String pregunta5 = request.getParameter("pregunta5");
         String pregunta6 = request.getParameter("pregunta6");
         String pregunta7 = request.getParameter("pregunta7");
-        String idAlbergue = request.getParameter("id");
+        String idAlbergue = request.getParameter("idAlbergue");
+        String idUsuario = request.getParameter("idUsuario");
         
         int i=200;
         int p1= Integer.parseInt(pregunta1);
@@ -126,9 +158,32 @@ public class ServletTest extends HttpServlet {
         
         if(i<=puntos)
         {
+            //Se inserta a la BD el cursos
+
+            ModeloAlbergue model = new ModeloAlbergue();
+            Albergue a = model.buscaAlbergue(Integer.parseInt(idAlbergue));
+
+            ModeloUsuario model2 = new ModeloUsuario();
+            Usuario a2 = model2.buscaUsuario(Integer.parseInt(idUsuario));
+            //Se almacena en memoria llamada request
+
+            request.setAttribute("data2",a);
+            request.setAttribute("data3",a2);
+            
             request.getRequestDispatcher("test3.jsp").forward(request, response);
+            
         }else{
-            request.getRequestDispatcher("ServletMascota?tipo=listarMascotaAlbergue&id="+idAlbergue).forward(request, response);
+            ModeloAlbergue model = new ModeloAlbergue();
+            Albergue a = model.buscaAlbergue(Integer.parseInt(idAlbergue));
+
+            ModeloUsuario model2 = new ModeloUsuario();
+            Usuario a2 = model2.buscaUsuario(Integer.parseInt(idUsuario));
+            //Se almacena en memoria llamada request
+
+            request.setAttribute("data2",a);
+            request.setAttribute("data3",a2);
+            
+            request.getRequestDispatcher("ServletMascota?tipo=listarMascotaAlbergue&idMascota="+idAlbergue+"&idAlbergue="+idAlbergue+"&idUsuario="+idUsuario).forward(request, response);
         }
     }
     protected void test3(HttpServletRequest request, HttpServletResponse response) 
@@ -139,9 +194,10 @@ public class ServletTest extends HttpServlet {
         String tamano = request.getParameter("tamano");
         String pelaje= request.getParameter("pelaje");
         String caracter = request.getParameter("caracter");
-        String id = request.getParameter("id");
+        String idAlbergue = request.getParameter("idAlbergue");
+        String idUsuario = request.getParameter("idUsuario");
         
-        int IdAlbergue=Integer.parseInt(id);
+        int IdAlbergue=Integer.parseInt(idAlbergue);
         int IdTamano=Integer.parseInt(tamano);
         int IdPelaje=Integer.parseInt(pelaje);
         int IdCaracter=Integer.parseInt(caracter);
@@ -156,11 +212,38 @@ public class ServletTest extends HttpServlet {
         List<Mascota> info2 = new ModeloMascota().listarMascota(IdAlbergue);
         //Se almacena en memoria llamada request
         request.setAttribute("data2",info2);
+        
+        ModeloAlbergue model = new ModeloAlbergue();
+        Albergue a = model.buscaAlbergue(Integer.parseInt(idAlbergue));
+
+        ModeloUsuario model2 = new ModeloUsuario();
+        Usuario a2 = model2.buscaUsuario(Integer.parseInt(idUsuario));
+        //Se almacena en memoria llamada request
+
+        request.setAttribute("data3",a);
+        request.setAttribute("data4",a2);
+        
         //Se reenvia el request(con los datos) al jsp catalogo.jsp
         request.getRequestDispatcher("mascotaIdeal.jsp").forward(request, response);
+    }
+    protected void listarDatos(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException 
+    {
+        //Se obtiene los parametros
+        String idAlbergue = request.getParameter("idAlbergue");
+        String idUsuario = request.getParameter("idUsuario");
+        //Se inserta a la BD el cursos
         
+        ModeloAlbergue model = new ModeloAlbergue();
+        Albergue a = model.buscaAlbergue(Integer.parseInt(idAlbergue));
         
-
-
+        ModeloUsuario model2 = new ModeloUsuario();
+        Usuario a2 = model2.buscaUsuario(Integer.parseInt(idUsuario));
+        //Se almacena en memoria llamada request
+        
+        request.setAttribute("data2",a);
+        request.setAttribute("data3",a2);
+        //Se reenvia el request(con los datos) al jsp catalogoAlbergue.jsp
+        request.getRequestDispatcher("test1.jsp").forward(request, response);
     }
 }

@@ -98,4 +98,35 @@ public class ModeloUsuario {
         }
         return salida;
     }
+    public Usuario buscaUsuario(int idUsuario)
+    {
+        Connection conn= null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        Usuario obj = null;
+        try {
+            conn = MysqlDBConexion.getConexion();
+            String sql ="select * from usuario where idUsuario=?";
+            pstm = conn.prepareStatement(sql);
+            pstm.setInt(1, idUsuario);
+            rs = pstm.executeQuery();
+            if(rs.next()){
+                obj = new Usuario();
+                obj.setIdUsuario(rs.getInt("idUsuario"));
+                obj.setNombreUsuario(rs.getString("Nombre"));
+                obj.setApellidoUsuario(rs.getString("Apellido"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally{
+            try {
+                if(rs!= null) rs.close();
+                if(pstm!= null) pstm.close();
+                if(conn!= null) conn.close();
+            } catch (Exception e2) {
+            }
+        }
+
+        return obj;
+    }
 }

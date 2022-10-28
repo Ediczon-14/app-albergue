@@ -371,7 +371,7 @@ public class ModeloMascota {
         PreparedStatement pstm=null;
         try 
         {   cn=MysqlDBConexion.getConexion();
-            String sql="select * from mascota where idAlbergue=? and idTamano=? and idPelaje=? and idCaracter=?";
+            String sql="select * from mascota where idAlbergue=? and idTamano=? and idPelaje=? and estado=1 and idCaracter=?";
             pstm=cn.prepareStatement(sql);
             pstm.setInt(1, idAlbergue);
             pstm.setInt(2, idTamano);

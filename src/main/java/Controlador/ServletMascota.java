@@ -12,8 +12,10 @@ import Entidad.Pelaje;
 import Entidad.Sexo;
 import Entidad.Solicitud;
 import Entidad.Tamano;
+import Entidad.Usuario;
 import Modelo.ModeloAlbergue;
 import Modelo.ModeloMascota;
+import Modelo.ModeloUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -138,16 +140,20 @@ public class ServletMascota extends HttpServlet {
         //Se obtiene los parametros
         String idMascota = request.getParameter("idMascota");
         String idAlbergue = request.getParameter("idAlbergue");
+        String idUsuario = request.getParameter("idUsuario");
         //Se inserta a la BD el cursos
         List<Mascota> info = new ModeloMascota().listarMascota(Integer.parseInt(idMascota));
         
         ModeloAlbergue model = new ModeloAlbergue();
-        
         Albergue a = model.buscaAlbergue(Integer.parseInt(idAlbergue));
+        
+        ModeloUsuario model2 = new ModeloUsuario();
+        Usuario a2 = model2.buscaUsuario(Integer.parseInt(idUsuario));
         //Se almacena en memoria llamada request
         request.setAttribute("data",info);
         
         request.setAttribute("data2",a);
+        request.setAttribute("data3",a2);
         //Se reenvia el request(con los datos) al jsp catalogoAlbergue.jsp
         request.getRequestDispatcher("catalogoAlbergue.jsp").forward(request, response);
     }
