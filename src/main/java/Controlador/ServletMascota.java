@@ -120,7 +120,10 @@ public class ServletMascota extends HttpServlet {
                                                                 }else if(tipo.equals("GraficoMascotas"))
                                                                         {
                                                                             GraficoMascotas(request, response);
-                                                                        }
+                                                                        }else if(tipo.equals("GraficoInformacion"))
+                                                                            {
+                                                                                GraficoInformacion(request, response);
+                                                                            }
     }
     protected void listarMascota(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
@@ -509,7 +512,8 @@ public class ServletMascota extends HttpServlet {
         request.setAttribute("data2",info2);
         //Se reenvia el request(con los datos) al jsp catalogo.jsp
         request.getRequestDispatcher("estadistica.jsp").forward(request, response);
-    }protected void GraficoMascotas(HttpServletRequest request, HttpServletResponse response) 
+    }
+    protected void GraficoMascotas(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
     {
  
@@ -529,5 +533,26 @@ public class ServletMascota extends HttpServlet {
         
         //Se reenvia el request(con los datos) al jsp catalogo.jsp
         request.getRequestDispatcher("charts.jsp").forward(request, response);
+    }
+    protected void GraficoInformacion(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException 
+    {
+ 
+        //Se obtiene los parametros
+        String id = request.getParameter("id");
+        //Se inserta a la BD el cursos
+        List<Solicitud> info = new ModeloMascota().listarSolicitudAlbergue(Integer.parseInt(id));
+        List<Mascota> info2 = new ModeloMascota().listarMascota(Integer.parseInt(id));
+        //Se almacena en memoria llamada request
+        request.setAttribute("data",info);
+        request.setAttribute("data2",info2);
+        
+        
+        ModeloAlbergue model2 = new ModeloAlbergue();
+        Albergue a3 = model2.buscaAlbergue(Integer.parseInt(id));
+        request.setAttribute("data3",a3);
+        
+        //Se reenvia el request(con los datos) al jsp catalogo.jsp
+        request.getRequestDispatcher("GraficosInformacion.jsp").forward(request, response);
     }
 }

@@ -4,6 +4,10 @@
     Author     : edicz
 --%>
 
+<%@page import="Entidad.Solicitud"%>
+<%@page import="Entidad.Mascota"%>
+<%@page import="java.util.List"%>
+<%@page import="Entidad.Albergue"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,7 +27,7 @@
                 <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="index.jsp" class="nav-link px-2 link-secondary">Inicio</a></li>
                     <li><a href="login.jsp" class="nav-link px-2 link-dark">Adoptar</a></li>
-                    <li><a href="#" class="nav-link px-2 link-dark">Informacion</a></li>
+                    <li><a href="ServletMascota?tipo=GraficoInformacion&id=4" class="nav-link px-2 link-dark">Informacion</a></li>
                     <li><a href="#" class="nav-link px-2 link-dark">Nosotros</a></li>
                 </ul>
 
@@ -85,7 +89,6 @@
                 <!-- Wrap the rest of the page in another container to center all the content. -->
                 <br>
                 <div class="container marketing">
-
                     <!-- Three columns of text below the carousel -->
                     <div class="row">
                         <div class="col-lg-4 text-center">
@@ -122,7 +125,7 @@
                             <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" src="https://www.purina.es/sites/default/files/styles/ttt_image_690/public/2021-12/image-text-component-getting-a-dog.webp?itok=4_Qo6Jzb"  width="500" height="500" aria-label="Placeholder: 500x500" alt="Third slide">
                         </div>
                     </div>
-
+                </div>
                     <hr class="featurette-divider">
                     <!-- /END THE FEATURETTES -->
 
