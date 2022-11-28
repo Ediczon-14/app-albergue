@@ -16,6 +16,16 @@ import Entidad.Usuario;
 import Modelo.ModeloAlbergue;
 import Modelo.ModeloMascota;
 import Modelo.ModeloUsuario;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.io.font.FontConstants;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.layout.element.Image;
+import com.itextpdf.layout.property.TextAlignment;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -123,7 +133,10 @@ public class ServletMascota extends HttpServlet {
                                                                         }else if(tipo.equals("GraficoInformacion"))
                                                                             {
                                                                                 GraficoInformacion(request, response);
-                                                                            }
+                                                                            }else if(tipo.equals("certificado"))
+                                                                                {
+                                                                                    certificado(request, response);
+                                                                                }
     }
     protected void listarMascota(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 
@@ -403,6 +416,46 @@ public class ServletMascota extends HttpServlet {
         
         //Se reenvia el request(con los datos) al jsp catalogo.jsp
         request.getRequestDispatcher("listarSolicitudUsuario.jsp").forward(request, response);
+    }
+    
+    protected void certificado(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException 
+    {
+        String NombreMascota = request.getParameter("NombreMascota");
+        String NombreAlbergue = request.getParameter("NombreAlbergue");
+        String NombreUsuario = request.getParameter("NombreUsuario");
+        String ApellidoUsuario = request.getParameter("ApellidoUsuario");
+        String FechaAdopcion = request.getParameter("FechaAdopcion");
+        
+        response.setContentType("application/pdf");
+        PdfWriter write = new PdfWriter(response.getOutputStream());
+        PdfDocument pdf = new PdfDocument(write);
+        Document document = new Document(pdf);
+        PdfFont font = PdfFontFactory.createFont(FontConstants.TIMES_ROMAN);
+        
+ 
+        Paragraph preface = new Paragraph("Certificado de Adopcion").setFont(font);
+        // add text
+        preface.setTextAlignment(TextAlignment.CENTER);
+        preface.setFontSize(45f);              
+        document.add(preface);
+        
+        Paragraph p = new Paragraph("El presente documento certifica que la mascota "+NombreMascota
+        +" del Albergue "+NombreAlbergue+" fue oficialmente adoptado por el Sr. "+NombreUsuario+" "+ApellidoUsuario+" el dia "+FechaAdopcion+". Por este motivo el Sr se compromete "
+                + "a cuidar y alimentar a su mascota para siempre.").setFont(font);
+        p.setTextAlignment(TextAlignment.JUSTIFIED);
+        p.setFontSize(14f);
+        
+        
+        //Image image = new Image(ImageDataFactory.create("https://photoshop-kopona.com/uploads/posts/2019-02/1550510636_17.jpg"));
+        
+        //Image dog = new Image(ImageDataFactory.create("G:\\gamst.png"));
+        
+        document.add(p);
+        //document.add(dog);
+        //document.add(image);
+        document.close();
+        
     }
     protected void listarSolicitudAlbergue(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException 

@@ -75,6 +75,62 @@
                     </div>
                     <div class="col-9 card">
                         <div class="text-center card-header">
+                            <h1>Certificado</h1>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm card-body">
+                                <table border="1" class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>CODIGO DE SOLICITUD</th>
+                                            <th>FECHA DE SOLICITUD</th>
+                                            <th>FECHA DE ENTREGA</th>
+                                            <th>FOTO</th>
+                                            <th>NOMBRE DE MASCOTA</th>
+                                            <th>Accion</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%
+                                    if(da!=null)
+                                    {
+                                        Collections.reverse(da);
+                                        for(Solicitud a:da)
+                                        {
+                                            if(a.getEstado().equalsIgnoreCase("Finalizado"))
+                                            {
+                                                
+                                            
+                                    %>
+                                            <tr>
+                                                <td><%=a.getIdSolicitud()%></td>
+                                                <td><%=a.getFechaSolicitud()%></td>
+                                                <td><%=a.getFechaEntrega()%></td>
+                                                <td><img width="40" height="40"  src="<%=a.getFotoMascota()%>"  alt="Card image cap"></td>
+                                                <td><%=a.getNombreMascota()%></td>
+                                                <td>
+                                                    <form action="ServletMascota">
+                                                        <input type="hidden" name="tipo" value="certificado">
+                                                        <input type="text" name ="NombreMascota" style="display:none" value="<%=a.getNombreMascota()%>"/>
+                                                        <input type="text" name ="NombreAlbergue" style="display:none" value="<%=a.getNombreAlbergue()%>"/>
+                                                        <input type="text" name ="NombreUsuario" style="display:none" value="<%=a.getNombreUsuario()%>"/>
+                                                        <input type="text" name ="ApellidoUsuario" style="display:none" value="<%=a.getApellidoUsuario()%>"/>
+                                                        <input type="text" name ="FechaAdopcion" style="display:none" value="<%=a.getFechaEntrega()%>"/>
+                                                        <input type="submit" value="Certificado" class="btn btn-outline-dark my-2 my-sm-0 form-control"/>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                    <%
+                                            }
+                                        }
+                                    }
+                                    %>
+                                    </tbody>
+                                </table>
+                                <a href="javascript: history.go(-1)"  class="btn btn-dark my-2 my-sm-0 form-control">Regresar</a>
+                            </div>
+                        </div>
+                                    <div class="text-center card-header">
                             <h1>Solicitudes</h1>
                         </div>
                         <div class="row">
@@ -117,6 +173,7 @@
                         </div>
                     </div>
                 </div>
+                                    
             </div>
             <%@include file="/footer.jsp"%>
         </div>

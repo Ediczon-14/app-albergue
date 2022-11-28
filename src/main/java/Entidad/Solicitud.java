@@ -7,7 +7,7 @@ package Entidad;
 public class Solicitud 
 {
     int idSolicitud, idMascota, idUsuario, idEstado,idTamaño,idPelaje,idSexo, telefono, dni , meses;
-    String fechaSolicitud, fechaEntrega, fotoMascota, nombreMascota,Estado, nombreUsuario, apellidoUsuario;
+    String fechaSolicitud, fechaEntrega, fotoMascota, nombreMascota,Estado, nombreUsuario, apellidoUsuario, nombreAlbergue;
 
     public Solicitud() {
     }
@@ -146,6 +146,14 @@ public class Solicitud
 
     public void setMeses(int meses) {
         this.meses = meses;
+    }
+
+    public String getNombreAlbergue() {
+        return nombreAlbergue;
+    }
+
+    public void setNombreAlbergue(String nombreAlbergue) {
+        this.nombreAlbergue = nombreAlbergue;
     }
     
 }

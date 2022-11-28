@@ -447,7 +447,7 @@ public class ModeloMascota {
         PreparedStatement pstm=null;
         try 
         {   cn=MysqlDBConexion.getConexion();
-            String sql="select solicitud.idSolicitud, solicitud.fechaSolicitud, solicitud.fechaEntrega, mascota.Foto, mascota.Nombre, estado.Estado, usuario.idUsuario from solicitud INNER JOIN mascota INNER JOIN estado INNER JOIN usuario INNER JOIN albergue where solicitud.idMascota=mascota.idMascota and solicitud.idEstado=estado.idEstado and solicitud.idUsuario=usuario.idUsuario and solicitud.idUsuario=?";
+            String sql="select solicitud.idSolicitud, solicitud.fechaSolicitud, solicitud.fechaEntrega, mascota.Foto, mascota.Nombre, estado.Estado, usuario.idUsuario, usuario.Nombre, usuario.Apellido, albergue.Nombre from solicitud INNER JOIN mascota INNER JOIN estado INNER JOIN usuario INNER JOIN albergue where solicitud.idMascota=mascota.idMascota and solicitud.idEstado=estado.idEstado and solicitud.idUsuario=usuario.idUsuario and solicitud.idUsuario=?";
             pstm=cn.prepareStatement(sql);
             pstm.setInt(1, idUsuario);
             rs=pstm.executeQuery();
@@ -457,9 +457,12 @@ public class ModeloMascota {
                 alu.setFechaSolicitud(rs.getString("fechaSolicitud"));
                 alu.setFechaEntrega(rs.getString("fechaEntrega"));
                 alu.setFotoMascota(rs.getString("Foto"));
-                alu.setNombreMascota(rs.getString("Nombre"));
+                alu.setNombreMascota(rs.getString("mascota.Nombre"));
                 alu.setEstado(rs.getString("Estado"));
                 alu.setIdUsuario(rs.getInt("idUsuario"));
+                alu.setNombreUsuario(rs.getString("usuario.Nombre"));
+                alu.setApellidoUsuario(rs.getString("usuario.Apellido"));
+                alu.setNombreAlbergue(rs.getString("albergue.Nombre"));
                 data.add(alu);
             }
         } catch (Exception e) 
