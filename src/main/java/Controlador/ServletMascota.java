@@ -21,10 +21,8 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.io.font.FontConstants;
-import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
-import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.property.TextAlignment;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -446,9 +444,7 @@ public class ServletMascota extends HttpServlet {
         p.setTextAlignment(TextAlignment.JUSTIFIED);
         p.setFontSize(14f);
         
-        
         //Image image = new Image(ImageDataFactory.create("https://photoshop-kopona.com/uploads/posts/2019-02/1550510636_17.jpg"));
-        
         //Image dog = new Image(ImageDataFactory.create("G:\\gamst.png"));
         
         document.add(p);

@@ -109,13 +109,14 @@
                                                 <td><img width="40" height="40"  src="<%=a.getFotoMascota()%>"  alt="Card image cap"></td>
                                                 <td><%=a.getNombreMascota()%></td>
                                                 <td>
-                                                    <form action="ServletMascota">
+                                                    <form name="form1" action="certificado.jsp" target="_black">
                                                         <input type="hidden" name="tipo" value="certificado">
                                                         <input type="text" name ="NombreMascota" style="display:none" value="<%=a.getNombreMascota()%>"/>
                                                         <input type="text" name ="NombreAlbergue" style="display:none" value="<%=a.getNombreAlbergue()%>"/>
                                                         <input type="text" name ="NombreUsuario" style="display:none" value="<%=a.getNombreUsuario()%>"/>
                                                         <input type="text" name ="ApellidoUsuario" style="display:none" value="<%=a.getApellidoUsuario()%>"/>
                                                         <input type="text" name ="FechaAdopcion" style="display:none" value="<%=a.getFechaEntrega()%>"/>
+                                                        <input type="text" name ="FotoMascota" style="display:none" value="<%=a.getFotoMascota()%>"/>
                                                         <input type="submit" value="Certificado" class="btn btn-outline-dark my-2 my-sm-0 form-control"/>
                                                     </form>
                                                 </td>
@@ -172,6 +173,7 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
                                     
             </div>

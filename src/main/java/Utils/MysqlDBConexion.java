@@ -10,7 +10,7 @@ public class MysqlDBConexion
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            cn = DriverManager.getConnection("jdbc:mysql://bxjwrnc6fhhp4b0zreow-mysql.services.clever-cloud.com/bxjwrnc6fhhp4b0zreow","uixjygeln4zrip4n","tEWwL6CNBUlp2JWvFlXY");
+            cn = DriverManager.getConnection("jdbc:mysql://localhost/albergue","root","");
         }
         catch(Exception ex)
         {
